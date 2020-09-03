@@ -37,3 +37,9 @@ def train_val_test_spit(x,y,test_size):
     return X_train, X_val, X_test, y_train, y_val, y_test
 
 
+def enlarge(n):
+    """
+    Param n is a number
+    Function will enlarge the number
+    """
+    return n * 100
