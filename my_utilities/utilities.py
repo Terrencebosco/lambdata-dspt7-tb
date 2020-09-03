@@ -1,3 +1,7 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+
 
 # helper function for dropping columns with nan values. 
 
@@ -23,6 +27,7 @@ def num_nans(df):
     return print(df.isnull().sum())
 
 
+
 def train_val_test_spit(x,y,test_size):
     '''
     function will return X_train, X_val, X_test, y_train, y_val, y_test
@@ -37,9 +42,24 @@ def train_val_test_spit(x,y,test_size):
     return X_train, X_val, X_test, y_train, y_val, y_test
 
 
+
 def enlarge(n):
     """
     Param n is a number
     Function will enlarge the number
     """
     return n * 100
+
+if __name__ == "__main__":
+    
+    d = {'col1': [1, 5, 3, 100, 8], 'col2': [3, 4, np.nan, 5, 6]}
+    df = pd.DataFrame(data=d)
+
+    x = df['col1']
+    y = df['col2']
+
+    X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_spit(x, y, .2)
+
+    print(X_val)
+
+    print(enlarge(7))
