@@ -6,7 +6,7 @@ https://github.com/Terrencebosco/lambdata-dspt7-tb
 ### Installation
 
 ```python
-pip install -i https://test.pypi.org/simple/ Terrence-Bosco-utilities
+pip install -i https://test.pypi.org/simple/ Terrence-Bosco-classses
 ```
 
 once installed:
