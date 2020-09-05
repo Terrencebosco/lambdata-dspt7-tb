@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 
-class utilities(DataFrame):
+class MyUtilities(DataFrame):
     """
     Adding additional functionality to pandas DataFrame.
     
@@ -25,9 +25,8 @@ class utilities(DataFrame):
         derivative `utilites` the same type as yours.  It should
         be enough to return the name of the Class.  
         """
-        def _c(*args, **kwargs):
-            return utilities(*args, **kwargs).__finalize__(self)
-        return _c
+        return MyUtilities
+    
 
     def drop_high_nan(self, num_nans):
         '''
@@ -106,23 +105,3 @@ class utilities(DataFrame):
             random_state=random_state, shuffle=shuffle)
 
         return X_train, X_val, X_test, y_train, y_val, y_test
-
-
-if __name__ == "__main__":
-    d = {'col1': [1, 5, 3, 100, 8], 'col2': [3, 4, np.nan, 5, 6]}
-    df = pd.DataFrame(data=d)
-
-    x = df['col1']
-    y = df['col2']
-
-    dt = utilities(df)
-
-    print(dt.num_nans())
-    
-    X_train, X_val, X_test, y_train, y_val, y_test = dt.train_validation_test_split('col1','col2',random_state=42)
-
-    print(X_val)
-
-    print(dt.shape)
-
-    print(dt.drop_high_nan(1))

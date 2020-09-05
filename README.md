@@ -11,7 +11,7 @@ pip install -i https://test.pypi.org/simple/ Terrence-Bosco-utilities
 
 once installed:
 ```python
-from my_utilities.utilities import function_name
+from my_lambda.my_classes import MyUtilities
 ```
 
 list of functions:

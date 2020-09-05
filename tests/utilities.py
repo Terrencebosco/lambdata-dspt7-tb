@@ -90,17 +90,3 @@ def train_validation_test_split(df, features, target,
         random_state=random_state, shuffle=shuffle)
 
     return X_train, X_val, X_test, y_train, y_val, y_test
-
-
-if __name__ == "__main__":
-    d = {'col1': [1, 5, 3, 100, 8], 'col2': [3, 4, np.nan, 5, 6]}
-    df = pd.DataFrame(data=d)
-
-    x = df['col1']
-    y = df['col2']
-
-    X_train, X_val, X_test, y_train, y_val, y_test = train_validation_test_split(df, 'col1', 'col2', random_state=42)
-
-    print(X_val)
-
-    print(enlarge(7))
