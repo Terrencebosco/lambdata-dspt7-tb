@@ -1,64 +1,28 @@
-# making utility functions 
-
-# %%
+# utilities_build.py
 import pandas as pd
-import numpy as np
-import sklearn 
 from sklearn.model_selection import train_test_split
-#%%
-d = {'col1': [1, 5, 3, 100, 8], 'col2': [3, 4, np.nan, 5, 6]}
-df = pd.DataFrame(data=d)
 
 
-# %%  num nans helper function
 def num_nans(df):
     """
-    print the number of nans for your dataframe.
+    Produces the number of nans in a DataFrame.
+
+    :param df: an instance of :class: pd.DataFrame
     """
-    return print(df.isnull().sum())
-
-num_nans(df)
+    return df.isnull().sum()
 
 
-# %%
-x = df['col1']
-y = df['col2']
-
-X_train, X_test, y_train, y_test = train_test_split(x, y,
- test_size=.2, random_state=42)
-
-
-
- # %%
-def train_val_test_spit(x,y,test_size):
+def train_val_test_spit(X, y, test_size):
     '''
-    function will return X_train, X_val, X_test, y_train, y_val, y_test
-    inputs from user, x (data without target), y (target vector), and split size.
+    Creates a train-val-test split for the specified DataFrame X and
+    target vector y.
 
-    invoke: X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_spit(x, y, .2)
+    :param X: an instance of :class: pd.DataFrame
+    :param y: an instance of :class: pd.Series
+    :param test_size: a float, where 0 <= test_size < 1
     '''
     X_train, X_test, y_train, y_test = train_test_split(x, y,
                 test_size=test_size, random_state=42)
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train,
                 test_size=test_size, random_state=42)
     return X_train, X_val, X_test, y_train, y_val, y_test
-
-# %%
-X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_spit(x, y, .2)
-
-
-
-# %% 
-from utilities import train_val_test_spit
-
-# %% 
-X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_spit(x, y, .2)
-
-# %% 
-from utilities import num_nans
-
-#%%
-from sklearn.model_selection import train_test_split
-from utilities import train_val_test_spit
-
-X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_spit(x, y, .2)
