@@ -95,3 +95,98 @@ class MyUtilities(DataFrame):
             random_state=random_state, shuffle=shuffle)
 
         return X_train, X_val, X_test, y_train, y_val, y_test
+
+
+    def drop_str(self, string, all_columns=True, single_column=None):
+        '''
+        Uses: subset data
+
+        function iterates over Pandas Dataframe and removes rows that contain 
+        a string.
+
+        Args:
+            string (string): 
+                the string we dont want to include in the data.
+
+            all_columns (bool):
+                default = True
+                will iterate over every column of data. 
+            
+            single_column (string): 
+                default = None
+                (when all_colunns = False) set value to name of column to iterate over.
+
+        example:
+
+            we want to remove movies that have horror genre 
+            from a data set of different movies.
+
+                df.head(3)
+
+                genre           movie
+                action  wild-wild-west
+                horror              it
+                drama    the notebook
+                
+                implementation:
+                    df = df.drop_str("horror", all_columns=False, single_column="genre")
+                
+                df.head(3)
+                genre           movie
+                action  wild-wild-west
+                drama    the notebook
+                action       oceans 11
+        '''
+
+        if all_columns == True:
+            column_list = self.columns.to_list()
+            for column in column_list:
+                self = self[~self[column].str.contains(string,na=False)]
+            return self 
+        else:
+            return self[~self[single_column].str.contains(string,na=False)]
+
+
+    def string_replace(self, string_to_remove, column, replacement=''):
+        """
+        Uses: replace/remove strings in series elements (formatting) 
+
+        Args:
+            string_to_remove: (str)
+                the string character you want to remove/replace.
+            
+            column: (str)
+                the column name you want to iterate over. 
+            
+            replacement: defult = ""
+                what you want to replace string_to_remove with. defult 
+                removes the string. 
+
+               drop = ['horror', 'drama', '/']
+        
+        Implimentation:
+        
+            for i in drop:
+                df = df.string_replace(i, column='genre')
+        """
+
+
+        self[column] = self[column].mask(self[column].str.contains(string_to_remove),
+            self[column].str.replace(string_to_remove,replacement))
+        return self
+
+
+    def replace_spaces_with_underscore_in_column_names_and_make_lowercasee(self):
+        """
+        Accepts a dataframe.
+        Alters column names- replacing spaces with '_' and column names lowercase.
+        Returns a dataframe.
+        """
+
+        
+        labels = list(self.columns)
+        for i in range(len(self.columns)):
+            labels[i] = labels[i].replace(' ', '_')
+            labels[i] = labels[i].lower()
+        self.columns = labels
+        return self
